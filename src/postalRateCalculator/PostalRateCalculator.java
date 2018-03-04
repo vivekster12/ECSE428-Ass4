@@ -13,11 +13,11 @@ public class PostalRateCalculator {
 	double weight;
 	
 	public static void main (String [] args){
-		checkValidPostalCode("h2x2y6");
+//		checkValidPostalCode("h2x2y6");
 	}
 	
 	// code for test 1
-	public static boolean checkValidInput(String [] args){
+	public static boolean checkNumParam(String [] args){
 		boolean valid = false;
 		
 		if(args.length == 7){
@@ -45,40 +45,40 @@ public class PostalRateCalculator {
 	}
 	
 	// code for test 3
-	public static boolean checkValidLengthParam(double args){
+	public static boolean checkValidLengthParam(String args){
 		boolean valid = true;
-		
-		if(args<0 || args >500){
+		double length = Double.parseDouble(args);
+		if(length<0 || length >500){
 			valid = false;
 		}
 		return valid;
 	}
 	
 	// code for test 4
-	public static boolean checkValidWidthParam(double args){
+	public static boolean checkValidWidthParam(String args){
 		boolean valid = true;
-		
-		if(args<0 || args >500){
+		double width = Double.parseDouble(args);
+		if(width<0 || width >500){
 			valid = false;
 		}
 		return valid;
 	}
 	
 	// code for test 5
-	public static boolean checkValidHeightParam(double args){
+	public static boolean checkValidHeightParam(String args){
 		boolean valid = true;
-		
-		if(args<0 || args >500){
+		double height = Double.parseDouble(args);
+		if(height<0 || height >500){
 			valid = false;
 		}
 		return valid;
 	}
 	
 	// code for test 6
-	public static boolean checkValidWeightParam(double args){
+	public static boolean checkValidWeightParam(String args){
 		boolean valid = true;
-		
-		if(args<0 || args >30){
+		double weight = Double.parseDouble(args);
+		if(weight<0 || weight >30){
 			valid = false;
 		}
 		return valid;
@@ -93,6 +93,21 @@ public class PostalRateCalculator {
 		
 		if(!input.equals(valid_args[0]) && !input.equals(valid_args[1]) && !input.equals(valid_args[2])){
 			valid = false;
+		}
+		return valid;
+	}
+	
+	// code for test 8
+	// test to see if all input parameters are valid 
+	public static boolean checkValidInput(String [] args){
+		boolean valid = false;
+		if(checkNumParam(args)){
+			if(checkValidPostalCode(args[0]) && checkValidPostalCode(args[1]) 
+					&& checkValidLengthParam(args[2]) && checkValidWidthParam(args[3]) 
+					&& checkValidHeightParam(args[4]) && checkValidWeightParam(args[5])
+					&& checkValidPostalType(args[6])){
+				valid = true;
+			}
 		}
 		return valid;
 	}
