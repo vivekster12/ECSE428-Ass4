@@ -10,13 +10,40 @@ public class TestCalc {
 	String [] input1;
 	String [] input2;
 	String [] input3;
+	
+	String [] input_a;
+	String [] input_b;
+	String [] input_c;
+	
+	String [] input_d;
+	String [] input_e;
+	String [] input_f;
+	
+	String [] input_g;
+	String [] input_h;
+	String [] input_i;
 	PostalRateCalculator PRC;
 
 	@Before
 	public void setUp (){
+		// param testing
 		input1 = new String [] {"h2x2y6","h2x2y6","12.0","134.0","0.0", "29.0","Xpress"};
 		input2 = new String [] {"h2s4e6","sdf","0.0","0.0","0.0", "0.0","Regular"};
 		input3 = new String [] {"h2s4e6","h2x2y6","23.0","233.0","65.0", "344.0","Regular"};
+		
+		// calc rate tests for differnt weights and postal types
+		input_a = new String [] {"h2x2y6","h2x2y6","12.0","134.0","0.0", "3.932","Regular"};
+		input_b = new String [] {"h2x2y6","h2x2y6","12.0","134.0","0.0", "13.932","Regular"};
+		input_c = new String [] {"h2x2y6","h2x2y6","12.0","134.0","0.0", "23.932","Regular"};
+		
+		input_d = new String [] {"h2x2y6","h2x2y6","12.0","134.0","0.0", "3.932","Xpress"};
+		input_e = new String [] {"h2x2y6","h2x2y6","12.0","134.0","0.0", "13.932","Xpress"};
+		input_f = new String [] {"h2x2y6","h2x2y6","12.0","134.0","0.0", "23.932","Xpress"};
+		
+		input_g = new String [] {"h2x2y6","h2x2y6","12.0","134.0","0.0", "3.932","Priority"};
+		input_h = new String [] {"h2x2y6","h2x2y6","12.0","134.0","0.0", "13.932","Priority"};
+		input_i = new String [] {"h2x2y6","h2x2y6","12.0","134.0","0.0", "23.932","Priority"};
+		
 		PRC = new PostalRateCalculator();
 	}
 	
@@ -122,14 +149,53 @@ public class TestCalc {
 		actValid = PRC.checkValidInput(input3);
 		assertFalse(actValid);
 	}
-	
+		
 	// test 9
 	@Test
-	public void testCalcRate(){
-		assertEquals(2.8,PRC.calcRate(input1),0.1);
-		assertEquals(-1,PRC.calcRate(input2),0.1);
-		assertEquals(-1,PRC.calcRate(input3),0.1);
-		
+	public void testCalcRate_w1_t1(){
+		assertEquals(1.8,PRC.calcRate(input_a),0.1);
+	}
+	// test 10
+	@Test
+	public void testCalcRate_w2_t1(){
+		assertEquals(2.95,PRC.calcRate(input_b),0.1);
+	}
+	// test 11
+	@Test
+	public void testCalcRate_w3_t1(){
+		assertEquals(4.10,PRC.calcRate(input_c),0.1);
+	}
+	
+	// test 12
+	@Test
+	public void testCalcRate_w1_t2(){
+		assertEquals(2.8,PRC.calcRate(input_d),0.1);
+	}
+	// test 13
+	@Test
+	public void testCalcRate_w2_t2(){
+		assertEquals(3.95,PRC.calcRate(input_e),0.1);
+	}
+	// test 14
+	@Test
+	public void testCalcRate_w3_t2(){
+		assertEquals(5.10,PRC.calcRate(input_f),0.1);
+	}
+	
+	// test 15
+	@Test
+	public void testCalcRate_w1_t3(){
+		assertEquals(3.8,PRC.calcRate(input_g),0.1);
+	}
+	// test 16
+	@Test
+	public void testCalcRate_w2_t3(){
+		assertEquals(4.95,PRC.calcRate(input_h),0.1);
+	}
+	// test 17
+	@Test
+	public void testCalcRate_w3_t3(){
+		assertEquals(6.10,PRC.calcRate(input_i),0.1);
 	}
 	
 }

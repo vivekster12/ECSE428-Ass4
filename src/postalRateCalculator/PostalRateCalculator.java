@@ -120,13 +120,14 @@ public class PostalRateCalculator {
 		}
 		
 		double rate = 0.0;
-		double weight = Double.parseDouble(args[3]);
+		double weight = Double.parseDouble(args[5]);
 		String postalType = args[6].toLowerCase();
 		double factor = 0.0;
 		
 		// check what type of parcel
 		// valid arguments
 		String [] valid_args = {"regular", "xpress", "priority"};
+		
 		if(postalType.equals(valid_args[0])){
 			factor = 0.0;
 		}
@@ -137,6 +138,7 @@ public class PostalRateCalculator {
 			factor = 2.0;
 		}
 		
+
 		// check weight category
 		if(weight<=5){
 			rate = 1.80 + factor;
@@ -144,11 +146,8 @@ public class PostalRateCalculator {
 		else if(weight>5 && weight <=15){
 			rate = 2.95 + factor;
 		}
-		else if(weight>15 && weight <=25){
-			rate = 4.10 + factor;
-		}
 		else{
-			rate = 4.70 + factor;
+			rate = 4.10 + factor;
 		}
 		
 		return rate;
