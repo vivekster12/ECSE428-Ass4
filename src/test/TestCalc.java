@@ -58,25 +58,30 @@ public class TestCalc {
 		actValid = PRC.checkNumParam(input3);
 		assertTrue(actValid);
 	}	
-	
+		
 	// test 2
 	@Test
-	public void testPostalCode(){
+	public void testPostalCodeFrom(){
 		boolean actValid = false;
 		actValid = PRC.checkValidPostalCode(input1[0]);
 		assertTrue(actValid);
-		actValid = PRC.checkValidPostalCode(input1[1]);
-		assertTrue(actValid);
 		actValid = PRC.checkValidPostalCode(input2[0]);
+		assertTrue(actValid);
+		actValid = PRC.checkValidPostalCode(input3[0]);
+		assertTrue(actValid);
+		
+	}
+	// test 3
+	@Test
+	public void testPostalCodeTo(){
+		boolean actValid = false;
+		actValid = PRC.checkValidPostalCode(input1[1]);
 		assertTrue(actValid);
 		actValid = PRC.checkValidPostalCode(input2[1]);
 		assertFalse(actValid);
-		actValid = PRC.checkValidPostalCode(input3[0]);
-		assertTrue(actValid);
 		actValid = PRC.checkValidPostalCode(input3[1]);
 		assertTrue(actValid);
 	}
-	
 	// test 3
 	@Test
 	public void testLengthParam(){

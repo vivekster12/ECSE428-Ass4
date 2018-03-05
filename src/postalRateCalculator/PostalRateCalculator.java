@@ -138,7 +138,6 @@ public class PostalRateCalculator {
 			factor = 2.0;
 		}
 		
-
 		// check weight category
 		if(weight<=5){
 			rate = 1.80 + factor;
