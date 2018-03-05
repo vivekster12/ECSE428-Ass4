@@ -9,13 +9,14 @@ import postalRateCalculator.PostalRateCalculator;
 public class TestCalc {
 	String [] input1;
 	String [] input2;
+	String [] input3;
 	PostalRateCalculator PRC;
 
 	@Before
 	public void setUp (){
-		input1 = new String [] {"h2x2y6","h2x2y6","0.0","0.0","0.0", "0.0","Xpress"};
+		input1 = new String [] {"h2x2y6","h2x2y6","12.0","134.0","0.0", "29.0","Xpress"};
 		input2 = new String [] {"h2s4e6","sdf","0.0","0.0","0.0", "0.0","Regular"};
-		
+		input3 = new String [] {"h2s4e6","h2x2y6","23.0","233.0","65.0", "344.0","Regular"};
 		PRC = new PostalRateCalculator();
 	}
 	
@@ -26,6 +27,8 @@ public class TestCalc {
 		actValid = PRC.checkNumParam(input1);
 		assertTrue(actValid);
 		actValid = PRC.checkNumParam(input2);
+		assertTrue(actValid);
+		actValid = PRC.checkNumParam(input3);
 		assertTrue(actValid);
 	}	
 	
@@ -41,6 +44,10 @@ public class TestCalc {
 		assertTrue(actValid);
 		actValid = PRC.checkValidPostalCode(input2[1]);
 		assertFalse(actValid);
+		actValid = PRC.checkValidPostalCode(input3[0]);
+		assertTrue(actValid);
+		actValid = PRC.checkValidPostalCode(input3[1]);
+		assertTrue(actValid);
 	}
 	
 	// test 3
@@ -50,6 +57,8 @@ public class TestCalc {
 		actValid = PRC.checkValidLengthParam(input1[2]);
 		assertTrue(actValid);
 		actValid = PRC.checkValidLengthParam(input2[2]);
+		assertTrue(actValid);
+		actValid = PRC.checkValidLengthParam(input3[2]);
 		assertTrue(actValid);
 	}
 	
@@ -61,6 +70,8 @@ public class TestCalc {
 		assertTrue(actValid);
 		actValid = PRC.checkValidWidthParam(input2[3]);
 		assertTrue(actValid);
+		actValid = PRC.checkValidWidthParam(input3[3]);
+		assertTrue(actValid);
 	}
 	
 	// test 5
@@ -70,6 +81,8 @@ public class TestCalc {
 		actValid = PRC.checkValidHeightParam(input1[4]);
 		assertTrue(actValid);
 		actValid = PRC.checkValidHeightParam(input2[4]);
+		assertTrue(actValid);
+		actValid = PRC.checkValidHeightParam(input3[4]);
 		assertTrue(actValid);
 	}
 	
@@ -81,6 +94,8 @@ public class TestCalc {
 		assertTrue(actValid);
 		actValid = PRC.checkValidWeightParam(input2[5]);
 		assertTrue(actValid);
+		actValid = PRC.checkValidWeightParam(input3[5]);
+		assertFalse(actValid);
 	}
 	
 	// test 7
@@ -92,16 +107,29 @@ public class TestCalc {
 		assertTrue(actValid);
 		actValid = PRC.checkValidPostalType(input2[6]);
 		assertTrue(actValid);
+		actValid = PRC.checkValidPostalType(input3[6]);
+		assertTrue(actValid);
 	}
 	
 	// test 8
 	@Test
-	public void testInput(){
+	public void testValidInput(){
 		boolean actValid = false;
 		actValid = PRC.checkValidInput(input1);
 		assertTrue(actValid);
 		actValid = PRC.checkValidInput(input2);
 		assertFalse(actValid);
+		actValid = PRC.checkValidInput(input3);
+		assertFalse(actValid);
+	}
+	
+	// test 9
+	@Test
+	public void testCalcRate(){
+		assertEquals(2.8,PRC.calcRate(input1),0.1);
+		assertEquals(-1,PRC.calcRate(input2),0.1);
+		assertEquals(-1,PRC.calcRate(input3),0.1);
+		
 	}
 	
 }

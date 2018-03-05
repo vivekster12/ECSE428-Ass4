@@ -111,6 +111,49 @@ public class PostalRateCalculator {
 		}
 		return valid;
 	}
+	
+	// calc rate
+	public static double calcRate(String [] args){
+		// check if valid
+		if(!checkValidInput(args)){
+			return -1;
+		}
+		
+		double rate = 0.0;
+		double weight = Double.parseDouble(args[3]);
+		String postalType = args[6].toLowerCase();
+		double factor = 0.0;
+		
+		// check what type of parcel
+		// valid arguments
+		String [] valid_args = {"regular", "xpress", "priority"};
+		if(postalType.equals(valid_args[0])){
+			factor = 0.0;
+		}
+		else if (postalType.equals(valid_args[1])){
+			factor = 1.0;
+		}
+		else{
+			factor = 2.0;
+		}
+		
+		// check weight category
+		if(weight<=5){
+			rate = 1.80 + factor;
+		}
+		else if(weight>5 && weight <=15){
+			rate = 2.95 + factor;
+		}
+		else if(weight>15 && weight <=25){
+			rate = 4.10 + factor;
+		}
+		else{
+			rate = 4.70 + factor;
+		}
+		
+		return rate;
+	}
+
 }
 
 
